@@ -2,16 +2,41 @@ package com.example.DataBase.domain;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.JoinColumn;
 
 @Entity
+
+@SqlResultSetMapping(
+		name="DefectMapping",
+	    classes={
+	        @ConstructorResult(
+	        		targetClass=ViewDefect.class,
+	            columns={
+	              
+	                @ColumnResult(name="error_code", type = String.class),
+	                @ColumnResult(name="severity", type = String.class),
+	              //  @ColumnResult(name="Sol", type = String.class)
+	            }
+	        )
+	    }
+	)
+
+@NamedNativeQuery(name = "Defect.getViewDefect", 
+		query = "select  d.error_code, d.severity "
+		+ "from  defect d ", resultSetMapping = "DefectMapping")
+
+
 public class Defect {
 
 	@Id

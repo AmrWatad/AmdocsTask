@@ -15,4 +15,6 @@ public interface DefectInstanceRepository extends CrudRepository<DefectInstance,
 	@Query(nativeQuery = true)
 	ArrayList<ViewDefects> getViewDefects();
 
+	
+	
 }

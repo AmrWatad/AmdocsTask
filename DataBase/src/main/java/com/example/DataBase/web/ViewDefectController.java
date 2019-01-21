@@ -9,16 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.DataBase.Repository.DefectInstanceRepository;
 import com.example.DataBase.domain.ViewDefects;
 
-
-
 @RestController
 public class ViewDefectController {
 	@Autowired
 	private DefectInstanceRepository repository;
 
-	  @RequestMapping("/ViewDefects")
-	  public ArrayList<ViewDefects> getViewDefects() {
-	    return repository.getViewDefects();
-	  }
-}
+	@RequestMapping("/ViewDefects")
+	public ArrayList<ViewDefects> getViewDefects() {
 
+		return repository.getViewDefects();
+	}
+}

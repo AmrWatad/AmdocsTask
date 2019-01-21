@@ -18,11 +18,14 @@ import com.example.DataBase.Routing.LogFileRouting;
 
 import java.io.File;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 
 @SpringBootApplication
 public class DataBaseApplication {
+	private static final Logger logger = LoggerFactory.getLogger(DataBaseApplication.class);
+
 	  @Autowired 
   private AppRepository appRepository;
 
@@ -38,6 +41,8 @@ public class DataBaseApplication {
 	  
 	public static void main(String[] args) {
 		SpringApplication.run(DataBaseApplication.class, args);
+		logger.info("Hello sping boot");
+
 	}
 	 @Bean
      CommandLineRunner runner(){
@@ -46,7 +51,6 @@ public class DataBaseApplication {
     	   String searchStr = "Caused by";
   			File file = new File("C:\\Users\\Amr\\Desktop\\AmdocsLog-master\\TestLog.log");
 
-   			//File file = new File("C:\\Users\\Rental-Media\\Desktop\\CMServer.20170914_2028.log");
    			LogFileRouting routingtotables = new LogFileRouting();
    			routingtotables.SearchDefects(file, searchStr,appRepository,defectRepository, logFileRepository,defectInstanceRepository);
    			

@@ -25,6 +25,9 @@ public interface AppRepository extends CrudRepository<App, Long>  {
 	@Query(nativeQuery= true, value = "select * from app ap where ap.name= ?1 AND ap.type= ?2  ")
 	List<App> checkAppexist(String name, String type);
 	
+	
+	
+	
 //	List<App> findByType(String type);
 //
 //	List<App> findByNameAndType(String name, String type);
