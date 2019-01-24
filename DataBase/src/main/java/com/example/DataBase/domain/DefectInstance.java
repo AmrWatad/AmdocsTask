@@ -35,6 +35,26 @@ import javax.persistence.ColumnResult;
 		+ " where ap.id=di.appid and d.id=di.defectid ", resultSetMapping = "DefectViewMapping")
 
 
+
+@SqlResultSetMapping(
+		name="DefectViewCountMapping",
+	    classes={
+	        @ConstructorResult(
+	        		targetClass=DefectInstanceCount.class,
+	            columns={
+	                @ColumnResult(name="name", type = String.class),
+	                @ColumnResult(name="count", type = String.class),
+	        
+	              //  @ColumnResult(name="Sol", type = String.class)
+	            }
+	        )
+	    }
+	)
+
+@NamedNativeQuery(name = "DefectInstance.getDefectsCount", 
+query = "select  d.name, count(d.NAME) as count "
++ "from  Defect_Instance b, App d where b.appid=d.id group by d.NAME ", resultSetMapping = "DefectViewCountMapping")
+
 public class DefectInstance  {
 
 

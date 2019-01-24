@@ -10,6 +10,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.example.DataBase.domain.App;
+import com.example.DataBase.domain.AppCount;
 
 public interface AppRepository extends CrudRepository<App, Long>  {
 	
@@ -24,6 +25,9 @@ public interface AppRepository extends CrudRepository<App, Long>  {
 
 	@Query(nativeQuery= true, value = "select * from app ap where ap.name= ?1 AND ap.type= ?2  ")
 	List<App> checkAppexist(String name, String type);
+
+	@Query(nativeQuery = true)
+	ArrayList<AppCount> getAppsCount();
 	
 	
 	

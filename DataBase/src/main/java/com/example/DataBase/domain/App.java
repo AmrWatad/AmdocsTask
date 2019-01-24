@@ -3,6 +3,8 @@ package com.example.DataBase.domain;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,13 +12,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SqlResultSetMapping;
 
 @Entity
 
-//@NamedNativeQuery(name = "App.checkAppexist", 
-//		query = "select *"
-//		+ "from app ap"
-//		+ "where ap.name=:appName AND ap.type= :appType ")
+
+@SqlResultSetMapping(
+		name="AppCount",
+	    classes={
+	        @ConstructorResult(
+	        		targetClass=AppCount.class,
+	            columns={
+	              
+	                @ColumnResult(name="Name", type = String.class),
+	                @ColumnResult(name="count", type = String.class),
+	              //  @ColumnResult(name="Sol", type = String.class)
+	            }
+	        )
+	    }
+	)
+
+@NamedNativeQuery(name = "App.getAppsCount", 
+		query = "select  d.name, count(d.NAME) as count "
+		+ "from  App d group by d.NAME ", resultSetMapping = "AppCount")
 
 public class App {
 	@Id
